@@ -1,26 +1,33 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Doctor {
-    private String id;
+    @Id
+    private String doctorId;
     private String name;
     private int age;
     private String city;
     private String specialty;
 
+    public Doctor() {
+    }
     public Doctor(String id, String name, int age, String city, String specialty) {
-        this.id = id;
+        this.doctorId = id;
         this.name = name;
         this.age = age;
         this.city = city;
         this.specialty = specialty;
     }
 
-    public String getId() {
-        return id;
+    public String getdoctorId() {
+        return doctorId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setdoctorId(String id) {
+        this.doctorId = id;
     }
 
     public String getName() {

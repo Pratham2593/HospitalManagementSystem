@@ -2,14 +2,18 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Doctor;
 import com.example.demo.service.DoctorServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/doctors")
 public class DoctorsController {
-    DoctorServices doctorServices=new DoctorServices();
+
+    @Autowired
+    private DoctorServices doctorServices;
     @GetMapping("/{id}")
     public Doctor getDoctor(@PathVariable String id){
         return doctorServices.getDoctor(id);
@@ -21,7 +25,7 @@ public class DoctorsController {
     }
 
     @GetMapping("/specialty/{specialty}")
-    public ArrayList<String>getDoctorByspecialty(@PathVariable String specialty){
+    public List<Doctor>getDoctorByspecialty(@PathVariable String specialty){
         return doctorServices.getDoctorByspecialty(specialty);
     }
 
@@ -31,7 +35,7 @@ public class DoctorsController {
     }
 
     @GetMapping("/getAllDoctors")
-    public ArrayList<Doctor>getAllDoctors(){
+    public List<Doctor> getAllDoctors(){
         return doctorServices.getAllDoctors();
     }
 }

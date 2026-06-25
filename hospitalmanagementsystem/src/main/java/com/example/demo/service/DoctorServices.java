@@ -2,25 +2,47 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Doctor;
 import com.example.demo.repository.DoctorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+
+@Service
 public class DoctorServices {
-    DoctorRepository doctorRepository=new DoctorRepository();
+    @Autowired
+    private DoctorRepository doctorRepository;
+
     public String addDoctor(Doctor doctor){
-        return doctorRepository.addDoctor(doctor);
+        doctorRepository.save(doctor);
+        return "Doctor Added Successfully..!";
     }
 
-    public Doctor getDoctor(String id){
-        return doctorRepository.getDoctor(id);
+    public Doctor getDoctor(String doctorId){
+        Optional<Doctor> doctor = doctorRepository.findById(doctorId);
+        if(doctor.isPresent()) return doctor.get();
+        return null;
     }
-    public ArrayList<String>getDoctorByspecialty(String specialty){
-        return doctorRepository.getDoctorByspecialty(specialty);
+
+    public List<Doctor>getAllDoctors(){
+        return doctorRepository.findAll();
     }
-    public String deleteDoctor(String id){
-        return doctorRepository.deleteDoctor(id);
+
+    public String deleteDoctor(String doctorId){
+        Optional<Doctor>doctor=doctorRepository.findById(doctorId);
+        if(doctor.isPresent()){
+            doctorRepository.deleteById(doctorId);
+            return "Doctor Deleted SuccessFully..!";
+        }
+        return "Doctor is not Present";
     }
-    public ArrayList<Doctor>getAllDoctors(){
-        return  doctorRepository.getAllDoctors();
+
+    public List<Doctor>getDoctorByspecialty(String specialty){
+        return doctorRepository.findBySpecialty(specialty);
     }
+
+
+
 }

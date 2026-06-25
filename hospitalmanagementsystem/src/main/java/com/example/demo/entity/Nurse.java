@@ -1,12 +1,18 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Nurse {
+    @Id
     private String id;
     private String name;
     private int age;
     private String city;
     private String department;
 
+    public Nurse(){}
     public Nurse(String id, String name, int age, String city, String department) {
         this.id = id;
         this.name = name;

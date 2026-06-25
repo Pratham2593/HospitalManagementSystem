@@ -2,16 +2,19 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Nurse;
 import com.example.demo.service.NurseServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/nurse")
 public class NurseController {
 
-    NurseServices nurseServices=new NurseServices();
+    @Autowired
+    private NurseServices nurseServices;
 
     @PostMapping("/addNurse")
     public String addNurse(@RequestBody Nurse nurse){
@@ -29,7 +32,7 @@ public class NurseController {
     }
 
     @GetMapping("/getAllNurse")
-    public ArrayList<Nurse>getAllNurse(){
+    public List<Nurse> getAllNurse(){
         return nurseServices.getAllNurse();
     }
 }
