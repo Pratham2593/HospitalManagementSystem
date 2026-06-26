@@ -2,6 +2,10 @@ package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 
 @Entity
 public class Doctor {
@@ -12,8 +16,13 @@ public class Doctor {
     private String city;
     private String specialty;
 
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointmentList;
     public Doctor() {
     }
+
+
+
     public Doctor(String id, String name, int age, String city, String specialty) {
         this.doctorId = id;
         this.name = name;
@@ -60,5 +69,12 @@ public class Doctor {
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
+    }
+    public List<Appointment> getAppointmentList() {
+        return appointmentList;
+    }
+
+    public void setAppointmentList(List<Appointment> appointmentList) {
+        this.appointmentList = appointmentList;
     }
 }
